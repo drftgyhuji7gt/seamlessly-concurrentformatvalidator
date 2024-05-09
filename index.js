@@ -1,14 +1,13 @@
-function firstMissingPositive(nums) {
-  const n = nums.length;
-  for (let i = 0; i < n; i++) {
-    while (nums[i] > 0 && nums[i] <= n && nums[nums[i] - 1] !== nums[i]) {
-      const temp = nums[nums[i] - 1];
-      nums[nums[i] - 1] = nums[i];
-      nums[i] = temp;
+function wiggleMaxLength(nums) {
+  if (nums.length === 0) return 0;
+  let up = 1;
+  let down = 1;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] > nums[i - 1]) {
+      up = down + 1;
+    } else if (nums[i] < nums[i - 1]) {
+      down = up + 1;
     }
   }
-  for (let i = 0; i < n; i++) {
-    if (nums[i] !== i + 1) return i + 1;
-  }
-  return n + 1;
+  return Math.max(up, down);
 }
